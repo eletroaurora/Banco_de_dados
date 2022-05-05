@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Alpha 1.0</title>
+	<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+	<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css'>
+	<link rel='stylesheet'
+		href='//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css'>
+	<link rel="stylesheet" href="./style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+		integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+		crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+	<!--LOGO (CABECALHO)-->
+	<div class="container">
+
+		<h1 style="text-align: center;"></h1>
+		<img src="/dist/Imagens/55ddc8_41afa4bce81642d0b4d49c100a4ca033_mv2-removebg-preview (3).png" height="50%"
+			width="50%">
+
+
+		<div id="toolbar">
+			<select class="form-control">
+				<option value="all">Exportar todos os dados</option>
+				<option value="selected">Exportar apenas os dados selecionados</option>
+			</select>
+		</div>
+
+		<!--BANCO DE DADOS PRINCIPAL-->
+		<table id="table" data-toggle="table" data-search="true" data-filter-control="true" data-show-export="true"
+			data-click-to-select="true" data-toolbar="#toolbar">
+			<thead>
+				<tr>
+					<!--DEFINICAO INICIAL DAS COLUNAS-->
+					<th data-field="state" data-checkbox="true"></th>
+					<th data-field="cliente" data-sortable="true">Cliente</th>
+					<th data-field="pot" data-sortable="true">Potência (kWp)</th>
+					<th data-field="modulos" data-sortable="true">Módulos</th>
+					<th data-field="inversor" data-sortable="true">Inversor</th>
+					<th data-field="micro_inversor" data-sortable="true">Micro-Inversor</th>
+					<th data-field="solar_edge" data-sortable="true">Solar Edge</th>
+					<th data-field="caracteristicas" data-sortable="true">Características</th>
+					<th data-field="fornecedora" data-filter-control="select" data-sortable="true">Fornecedora</th>
+					<th data-field="valor_pedido" data-sortable="true">Valor do Pedido</th>
+					<th data-field="condicao_estrutura" data-filter-control="select" data-sortable="true">Estrutura</th>
+					<th data-field="valor_estrutura" data-sortable="true">Valor da Estrutura</th>
+					<th data-field="consultor" data-filter-control="select" data-sortable="true">Consultor</th>
+					<th data-field="compra" data-sortable="true">Data de aquisição</th>
+					<th data-field="instalação" data-sortable="true">Data de chegada</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<!--DEFINICAO INICIAL DAS LINHAS (CLIENTES)-->
+				<tr>
+					<!--ALAN AGUIAR PEREIRA-->
+					<td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+					<td style="text-align: center;">Alan A.P</td>
+					<td id="potencia">3.24</td>
+					<td id="qtd_modulos">6</td>
+					<td id="qtd_inversores">0 </td>
+					<td id="qtd_micro_inversores">2 </td>
+					<td id="qtd_solar_edge">0 </td>
+					<td id="resumo_de_pedido">Longi 545 / QS1A - 220 </td>
+					<td id="qtd_fornecedora">Ecori </td>
+					<td id="qtd_valor">13.581.00 </td>
+					<td id="qtd_estrutura">Inclusa </td>
+					<td id="valor_estrutura">0 </td>
+					<td id="qtd_consultor">Márcio </td>
+					<td id="data_compra">04/04/2022 </td>
+					<td id="data_chegada">18/02/2022 </td>
+
+				</tr>
+				<tr>
+					<!--OUTRO CLIENTE-->
+					<td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+					<td style="text-align: center;">Btu</td>
+					<td id="potencia">3.24</td>
+					<td id="qtd_modulos">6</td>
+					<td id="qtd_inversores">0 </td>
+					<td id="qtd_micro_inversores">2 </td>
+					<td id="qtd_solar_edge">0 </td>
+					<td id="resumo_de_pedido">Longi 545 / QS1A - 220 </td>
+					<td id="qtd_fornecedora">Ecori </td>
+					<td id="qtd_valor">13.581.00 </td>
+					<td id="qtd_estrutura">Inclusa </td>
+					<td id="valor_estrutura">0 </td>
+					<td id="qtd_consultor">Márcio </td>
+					<td id="data_compra">04/04/2022 </td>
+					<td id="data_chegada">18/02/2022 </td>
+
+				</tr>
+			</tbody>
+		</table>
+		<!--BOTÃO DE ATIVAÇÃO DE FUNÇÃO-->
+		<button onclick="gerar_relatorios()">Gerar Relatório</button>
+		<button onclick="apagar_relatorios()">Apagar Relatório</button>
+	</div>
+	<div id="relatorio_geral">
+		<!--TABELA DE DEMONSTRAÇÃO DE RELATORIOS-->
+		<h1 style="text-align: center;"><b>Relatório</b></h1>
+		<table id="table1" data-toggle="table" data-show-export="true" data-click-to-select="true"
+			data-toolbar="#toolbar">
+			<thead>
+				<tr>
+					<th data-field="state" data-checkbox="true"></th>
+					<th data-field="qtd_clientes" data-sortable="true">Clientes (QTD)</th>
+					<th data-field="pot" data-sortable="true">Potência (kWp)</th>
+					<th data-field="modulos" data-sortable="true">Módulos</th>
+					<th data-field="inversor" data-sortable="true">Inversor</th>
+					<th data-field="micro_inversor" data-sortable="true">Micro-Inversor</th>
+					<th data-field="solar_edge" data-sortable="true">Solar Edge</th>
+					<th data-field="valor_pedido" data-sortable="true">Valor do Pedido</th>
+					<th data-field="valor_estrutura" data-sortable="true">Valor da Estrutura</th>
+					<th data-field="data_final" data-sortable="true">Tempo entre a compra e entrega</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+					<!--IDS DE RELATORIOS-->
+					<td id="clientes_relatorio"></td>
+					<td id="potencia_relatorio"></td>
+					<td id="modulos_relatorio"></td>
+					<td id="inversores_relatorio"></td>
+					<td id="micro_inversores_relatorio"></td>
+					<td id="solar_edge_relatorio"></td>
+					<td id="qtd_valor_relatorio"> </td>
+					<td id="data_compra_relatorio"> </td>
+					<td id="data_chegada_relatorio"> </td>
+
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+
+
+	<!-- BIBLIOTECAS PRINCIPAIS (NÃO MEXER) -->
+	<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+	<script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.js'></script>
+	<script
+		src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/editable/bootstrap-table-editable.js'>
+	</script>
+	<script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/export/bootstrap-table-export.js'>
+	</script>
+	<script src='//rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js'></script>
+	<script
+		src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.js'>
+	</script>
+	<script src="./script.js"></script>
+
+</body>
+
+</html>
